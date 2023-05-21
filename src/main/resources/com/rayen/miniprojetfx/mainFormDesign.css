@@ -86,3 +86,21 @@ and open the template in the editor.
 .btn:hover{
     -fx-background-color: linear-gradient(to bottom right, #0fb565, #399a8f);
 }
+
+.add-button {
+    -fx-text-fill: black;  /* Set the text color */
+    -fx-background-color: transparent;  /* Set the background color */
+    -fx-border-color: black;  /* Set the border color */
+    -fx-border-width: 1px;  /* Set the border width */
+    -fx-padding: 5px 10px;  /* Set the padding */
+    -fx-min-width: 60px;  /* Set the minimum width */
+    -fx-translate-x: 50%;  /* Move the button to the right */
+}
+
+.table-cell-nomP {
+    -fx-text-fill: blue;
+}
+
+
+
+

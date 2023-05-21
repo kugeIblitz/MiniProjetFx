@@ -1,23 +1,16 @@
 package com.rayen.miniprojetfx;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
-import javafx.scene.chart.AreaChart;
-import javafx.scene.chart.BarChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import java.sql.Connection;
+import connexion.connexion;
 import javafx.scene.layout.GridPane;
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DashboardController {
     @FXML
@@ -29,109 +22,10 @@ public class DashboardController {
     @FXML
     private Button customers_btn;
     @FXML
-    private Button logout_btn;
-
-    @FXML
     private AnchorPane inventory_form;
-
-//    @FXML
-//    private TableView<productData> inventory_tableView;
-
-//    @FXML
-//    private TableColumn<productData, String> inventory_col_productID;
-//
-//    @FXML
-//    private TableColumn<productData, String> inventory_col_productName;
-//
-//    @FXML
-//    private TableColumn<productData, String> inventory_col_type;
-//
-//    @FXML
-//    private TableColumn<productData, String> inventory_col_stock;
-//
-//    @FXML
-//    private TableColumn<productData, String> inventory_col_price;
-//
-//    @FXML
-//    private TableColumn<productData, String> inventory_col_status;
-//
-//    @FXML
-//    private TableColumn<productData, String> inventory_col_date;
-
-    @FXML
-    private ImageView inventory_imageView;
-
-    @FXML
-    private Button inventory_importBtn;
-
-    @FXML
-    private Button inventory_addBtn;
-
-    @FXML
-    private Button inventory_updateBtn;
-
-    @FXML
-    private Button inventory_clearBtn;
-
-    @FXML
-    private Button inventory_deleteBtn;
-
-    @FXML
-    private TextField inventory_productID;
-
-    @FXML
-    private TextField inventory_productName;
-
-    @FXML
-    private TextField inventory_stock;
-
-    @FXML
-    private TextField inventory_price;
-
-    @FXML
-    private ComboBox<?> inventory_status;
-
-    @FXML
-    private ComboBox<?> inventory_type;
 
     @FXML
     private AnchorPane menu_form;
-
-    @FXML
-    private ScrollPane menu_scrollPane;
-
-    @FXML
-    private GridPane menu_gridPane;
-
-//    @FXML
-//    private TableView<productData> menu_tableView;
-//
-//    @FXML
-//    private TableColumn<productData, String> menu_col_productName;
-//
-//    @FXML
-//    private TableColumn<productData, String> menu_col_quantity;
-//
-//    @FXML
-//    private TableColumn<productData, String> menu_col_price;
-
-    @FXML
-    private Label menu_total;
-
-    @FXML
-    private TextField menu_amount;
-
-    @FXML
-    private Label menu_change;
-
-    @FXML
-    private Button menu_payBtn;
-
-    @FXML
-    private Button menu_removeBtn;
-
-    @FXML
-    private Button menu_receiptBtn;
 
     @FXML
     private AnchorPane dashboard_form;
@@ -139,50 +33,140 @@ public class DashboardController {
     @FXML
     private AnchorPane customers_form;
 
-//    @FXML
-//    private TableView<customersData> customers_tableView;
-//
-//    @FXML
-//    private TableColumn<customersData, String> customers_col_customerID;
-//
-//    @FXML
-//    private TableColumn<customersData, String> customers_col_total;
-//
-//    @FXML
-//    private TableColumn<customersData, String> customers_col_date;
-//
-//    @FXML
-//    private TableColumn<customersData, String> customers_col_cashier;
+    @FXML
+    private ScrollPane menu_scrollPane;
 
     @FXML
-    private Label dashboard_NC;
+    private GridPane menu_gridPane;
 
     @FXML
-    private Label dashboard_TI;
+    private TableView<Product> menu_tableView;
 
     @FXML
-    private Label dashboard_TotalI;
+    private TableColumn menu_col_productName;
 
     @FXML
-    private Label dashboard_NSP;
+    private TableColumn menu_col_quantity;
 
-    @FXML
-    private AreaChart<?, ?> dashboard_incomeChart;
 
-    @FXML
-    private BarChart<?, ?> dashboard_CustomerChart;
 
-    private Alert alert;
+    public GridPane getMenuGridPane() {
+        return menu_gridPane;
+    }
 
-//    private Connection connect;
-//    private PreparedStatement prepare;
-//    private Statement statement;
-//    private ResultSet result;
+    public void initialize() {
+        populateUserData();
+    }
 
-    private Image image;
+    //------------------------------------------Getting the data Form the database-------------------------------------------------
+    private void populateUserData() {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connexion.getConnection();
+            if (connection != null) {
+                System.out.println("Database Connected");
+            }
+            String query = "SELECT * FROM userpro";
+            assert connection != null;
+            statement = connection.prepareStatement(query);
+            resultSet = statement.executeQuery();
 
-//    private ObservableList<productData> cardListData = FXCollections.observableArrayList();
+            int row = 0;
+            while (resultSet.next()) {
+                int idP = resultSet.getInt("idP");
+                String nomP = resultSet.getString("nomP");
 
+                // Create labels to display the user information
+                Label idLabel = new Label(String.valueOf(idP));
+                Label nameLabel = new Label(nomP);
+                Button addButton = new Button("Add");
+                addButton.getStyleClass().add("add-button");
+                addButton.setOnAction(event -> {
+                    // Get the selected nomP when the button is clicked
+                    String selectedNomP = nomP;
+
+                    addNomPToTableView(selectedNomP);
+                });
+                menu_gridPane.addRow(row++, nameLabel, addButton);
+            }
+            menu_scrollPane.setContent(menu_gridPane);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close the resources
+            try {
+                if (resultSet != null)
+                    resultSet.close();
+                if (statement != null)
+                    statement.close();
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //------------------------------------------Adding the product name and the quantity to the table view-------------------------------------------------
+    private void addNomPToTableView(String nomP) {
+        // Access the TableView using its fx:id (menu_tableView) in the FXML
+        TableView<Product> tableView = menu_tableView;
+
+        // Check if the nomP already exists in the TableView
+        for (Product product : tableView.getItems()) {
+            if (product.getName().equals(nomP)) {
+                // Increment the quantity of the existing product
+                product.setQuantity(product.getQuantity() + 1);
+
+                // Refresh the TableView to reflect the changes
+                tableView.refresh();
+                return;
+            }
+        }
+        Product newProduct = new Product(nomP, 1);
+
+        tableView.getItems().add(newProduct);
+        TableColumn<Product, String> nomPColumn = menu_col_productName;
+        nomPColumn.setCellFactory(column -> new TableCell<Product, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item);
+                }
+                getStyleClass().add("table-cell-nomP");
+            }
+        });
+        nomPColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn<Product, Integer> quantityColumn = menu_col_quantity;
+        quantityColumn.setCellFactory(column -> new TableCell<Product, Integer>() {
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(String.valueOf(item));
+                }
+                getStyleClass().add("table-cell-quantity");
+            }
+        });
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+    }
+
+
+
+
+
+
+
+//------------------------------------------Switch Form-------------------------------------------------
     public void switchForm(ActionEvent event) {
 
         if (event.getSource() == dashboard_btn) {
@@ -191,12 +175,6 @@ public class DashboardController {
             menu_form.setVisible(false);
             customers_form.setVisible(false);
 
-            dashboardDisplayNC();
-            dashboardDisplayTI();
-            dashboardTotalI();
-            dashboardNSP();
-            dashboardIncomeChart();
-            dashboardCustomerChart();
 
         } else if (event.getSource() == inventory_btn) {
             dashboard_form.setVisible(false);
@@ -204,65 +182,20 @@ public class DashboardController {
             menu_form.setVisible(false);
             customers_form.setVisible(false);
 
-            inventoryTypeList();
-            inventoryStatusList();
-            inventoryShowData();
+
         } else if (event.getSource() == menu_btn) {
             dashboard_form.setVisible(false);
             inventory_form.setVisible(false);
             menu_form.setVisible(true);
             customers_form.setVisible(false);
 
-            menuDisplayCard();
-            menuDisplayTotal();
-            menuShowOrderData();
+
         } else if (event.getSource() == customers_btn) {
             dashboard_form.setVisible(false);
             inventory_form.setVisible(false);
             menu_form.setVisible(false);
             customers_form.setVisible(true);
-
-            customersShowData();
         }
-
     }
 
-    private void dashboardCustomerChart() {
-    }
-
-    private void dashboardIncomeChart() {
-    }
-
-    private void dashboardNSP() {
-    }
-
-    private void dashboardTotalI() {
-    }
-
-    private void dashboardDisplayTI() {
-    }
-
-    private void inventoryTypeList() {
-    }
-
-    private void inventoryStatusList() {
-    }
-
-    private void inventoryShowData() {
-    }
-
-    private void menuShowOrderData() {
-    }
-
-    private void menuDisplayTotal() {
-    }
-
-    private void menuDisplayCard() {
-    }
-
-    private void customersShowData() {
-    }
-
-    private void dashboardDisplayNC() {
-    }
 }
