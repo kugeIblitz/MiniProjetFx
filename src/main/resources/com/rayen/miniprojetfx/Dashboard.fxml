@@ -52,11 +52,11 @@
                                                 <Font size="18.0" />
                                             </font>
                                         </Label>
-                                        <Button fx:id="dashboard_btn" onAction="#switchForm" layoutX="6.0" layoutY="199.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="Dashboard" />
-                                        <Button fx:id="inventory_btn" onAction="#switchForm" layoutX="6.0" layoutY="248.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="Inventory" />
-                                        <Button fx:id="menu_btn" onAction="#switchForm" layoutX="6.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="Menu" />
-                                        <Button fx:id="customers_btn" onAction="#switchForm" layoutX="6.0" layoutY="349.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="Customers" />
-                                        <Label layoutX="62.0" layoutY="560.0" text="Sign Out"  textFill="WHITE" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="62.0">
+                                        <Button fx:id="dashboard_btn" layoutX="6.0" layoutY="199.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="Dashboard" />
+                                        <Button fx:id="inventory_btn" layoutX="6.0" layoutY="248.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="Inventory" />
+                                        <Button fx:id="menu_btn" layoutX="6.0" layoutY="300.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="Menu" />
+                                        <Button fx:id="customers_btn" layoutX="6.0" layoutY="349.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="Customers" />
+                                        <Label layoutX="62.0" layoutY="560.0" text="Sign Out" textFill="WHITE" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="62.0">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -69,7 +69,7 @@
                     <center>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                             <children>
-                                <AnchorPane fx:id="dashboard_form" layoutX="196.0" layoutY="185.0" prefHeight="600.0" prefWidth="878.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <AnchorPane fx:id="dashboard_form" layoutX="196.0" layoutY="185.0" prefHeight="600.0" prefWidth="878.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
                                         <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="169.0" prefWidth="851.0" stylesheets="@mainFormDesign.css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
                                             <styleClass>
@@ -281,7 +281,7 @@
                                         <Separator layoutX="14.0" layoutY="312.0" prefHeight="5.0" prefWidth="852.0" AnchorPane.bottomAnchor="283.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="12.0" />
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane   fx:id="menu_form" layoutX="113.0" layoutY="181.0" prefHeight="600.0" prefWidth="878.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <AnchorPane fx:id="menu_form" layoutX="113.0" layoutY="181.0" prefHeight="600.0" prefWidth="878.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
                                         <AnchorPane layoutX="14.0" layoutY="17.0" prefHeight="566.0" prefWidth="512.0" stylesheets="@mainFormDesign.css" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="352.0" AnchorPane.topAnchor="17.0">
                                             <styleClass>
@@ -341,8 +341,8 @@
                                                         <Font size="15.0" />
                                                     </font>
                                                 </Label>
-                                                <Button fx:id="menu_payBtn" layoutX="15.0" layoutY="420.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="290.0" styleClass="btn" stylesheets="@mainFormDesign.css" text="Pay" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-                                                <Button fx:id="menu_removeBtn" layoutX="28.0" layoutY="489.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="119.0" styleClass="btn" stylesheets="@mainFormDesign.css" text="Remove" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="28.0" />
+                                                <Button fx:id="menu_GoGreenBtn" layoutX="15.0" layoutY="420.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="290.0" styleClass="btn" stylesheets="@mainFormDesign.css" text="Go green" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="15.0" onAction="#handleGoGreenButtonAction" AnchorPane.rightAnchor="15.0" />
+                                                <Button fx:id="menu_removeBtn" layoutX="28.0" layoutY="489.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="119.0" styleClass="btn" stylesheets="@mainFormDesign.css" text="Remove" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="28.0" onAction="#handleRemoveButtonAction" />
                                                 <Button fx:id="menu_receiptBtn" layoutX="173.0" layoutY="489.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="119.0" styleClass="btn" stylesheets="@mainFormDesign.css" text="Receipt" AnchorPane.bottomAnchor="36.0" AnchorPane.rightAnchor="28.0" />
                                             </children>
                                         </AnchorPane>

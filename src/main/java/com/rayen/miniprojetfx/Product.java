@@ -3,6 +3,7 @@ package com.rayen.miniprojetfx;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.image.Image;
 
 public class Product {
 
@@ -11,6 +12,12 @@ public class Product {
     private  SimpleStringProperty name;
     private  SimpleIntegerProperty quantity;
     private  SimpleDoubleProperty price;
+    private Image photo;
+
+    public Product(String name, Image photo) {
+        this.name = new SimpleStringProperty(name);
+        this.photo = photo;
+    }
 
     public Product(String name) {
         this.name = new SimpleStringProperty(name);
@@ -29,6 +36,15 @@ public class Product {
         this.name = new SimpleStringProperty(name);
         this.quantity = new SimpleIntegerProperty(quantity);
         this.price = new SimpleDoubleProperty(price);
+    }
+
+
+    public Image getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Image photo) {
+        this.photo = photo;
     }
 
 
