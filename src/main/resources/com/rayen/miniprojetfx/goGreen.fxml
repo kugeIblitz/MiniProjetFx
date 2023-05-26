@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="goGreen.css"
+            fx:controller="com.rayen.miniprojetfx.GoGreenController"
+            xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+    <TableView fx:id="tableView" layoutX="20" layoutY="20" prefHeight="360" prefWidth="560" stylesheets="@goGreen.css">
+        <columns>
+            <TableColumn fx:id="colProductName" prefWidth="150" text="Green Product">
+                <cellValueFactory>
+                    <PropertyValueFactory property="name" />
+                </cellValueFactory>
+            </TableColumn>
+
+            <TableColumn fx:id="colDescription" prefWidth="250" text="Description">
+                <cellValueFactory>
+                    <PropertyValueFactory property="description" />
+                </cellValueFactory>
+            </TableColumn>
+
+            <TableColumn fx:id="colYouSaved" prefWidth="150" text="You Saved">
+                <cellValueFactory>
+                    <PropertyValueFactory property="youSaved" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+</AnchorPane>
