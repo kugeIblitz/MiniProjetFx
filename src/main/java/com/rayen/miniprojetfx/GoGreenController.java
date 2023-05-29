@@ -22,7 +22,6 @@ public class GoGreenController {
     public void initialize() {
         // Set up the table columns
         colProductName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-//        colYouSaved.setCellValueFactory(cellData ->cellData.getValue().quantityProperty());
     }
 
     public void setGreenProducts(ObservableList<Product> products) {

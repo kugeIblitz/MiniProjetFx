@@ -193,7 +193,7 @@ public class DashboardController {
         menu_col_productName.setCellValueFactory(new PropertyValueFactory<>("name"));
         menu_col_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         menu_GoGreenBtn.setOnAction(this::openGoGreenWindow);
-//        menu_form.setVisible(true);
+        menu_form.setVisible(true);
         inventory_addBtn.setOnAction(event -> addProductToDatabase());
         menu_tableView.setItems(menuData);
 
@@ -482,18 +482,12 @@ public class DashboardController {
 
 //------------------------------------------Switch Form-------------------------------------------------
         public void switchForm(ActionEvent event) {
-            if (event.getSource() == dashboard_btn) {
-                dashboard_form.setVisible(true);
-                inventory_form.setVisible(false);
-                menu_form.setVisible(false);
 
-            } else if (event.getSource() == inventory_btn) {
-                dashboard_form.setVisible(false);
+        if (event.getSource() == inventory_btn) {
                 inventory_form.setVisible(true);
                 menu_form.setVisible(false);
 
             } else if (event.getSource() == menu_btn) {
-                dashboard_form.setVisible(false);
                 inventory_form.setVisible(false);
                 menu_form.setVisible(true);
 

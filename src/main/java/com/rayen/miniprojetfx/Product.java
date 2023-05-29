@@ -1,7 +1,5 @@
 package com.rayen.miniprojetfx;
 
-import javafx.beans.binding.BooleanExpression;
-import javafx.beans.binding.IntegerExpression;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
